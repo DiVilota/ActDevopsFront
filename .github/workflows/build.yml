@@ -49,3 +49,9 @@ jobs:
             # Navegar a la carpeta y desplegar
             docker compose pull
             docker compose up -d --force-recreate
+        env:
+          # PASO 3: Definimos los valores de esas variables
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
