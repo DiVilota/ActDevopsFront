@@ -55,8 +55,8 @@ jobs:
 
               # 3. Pull y despliegue
               echo "Descargando imágenes..."
-              docker compose pull
-              docker compose up -d --force-recreate
+              docker compose --profile frontend pull
+              docker compose --profile frontend up -d --force-recreate
         env:
           # PASO 3: Definimos los valores de esas variables
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
