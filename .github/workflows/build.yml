@@ -44,7 +44,6 @@ jobs:
             aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
             
             # Navegar a la carpeta donde está el docker-compose
-            cd /actividad
             
             # Descargar nuevas imágenes y reiniciar contenedores
             docker compose pull
