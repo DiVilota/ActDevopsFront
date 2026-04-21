@@ -39,12 +39,13 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # PASO 1: Pasamos las variables como ambiente al script
+          envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_REGION
           script: |
-            # Iniciar sesión en ECR en el servidor
-            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+            # PASO 2: Login en ECR usando las credenciales inyectadas
+            # Nota: Asegúrate de que la URL del registry sea correcta
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${secret.ID_CLIENT}.dkr.ecr.us-east-1.amazonaws.com
             
-            # Navegar a la carpeta donde está el docker-compose
-            
-            # Descargar nuevas imágenes y reiniciar contenedores
+            # Navegar a la carpeta y desplegar
             docker compose pull
             docker compose up -d --force-recreate
